@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:04:48 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/16 18:15:52 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/19 19:19:12 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static	void	ft_struct_set(int line_nbr, t_coor *info)
 
 	info->i_max = line_nbr;
 	info->tab = (int **)malloc(sizeof(int *) * line_nbr);
-	info->x_angle = 30;
+	info->x_angle = 0;
 	info->y_angle = 0;
-	info->z_angle = 30;
+	info->z_angle = 0;
 	info->zoom = 1;
 	info->x_offset = 0;
 	info->y_offset = 0;

@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 23:45:44 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/12 17:55:03 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/16 18:46:55 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-//#include "fdf.h"
+#include "fdf.h"
 	static	void	*sess_id;
 	static	void	*win_id;
 	static	void	*img_id;
@@ -99,7 +99,7 @@ int	mouse_hook(int button, int x, int y, void *param)
 	ft_draw_line(point_1, point_2);
 	return (1);
 }
-/*
+
 int main()
 {
 
@@ -110,9 +110,9 @@ int main()
 	int coor2[2] = {300, 356};
 	sess_id = mlx_init();
 	win_id = mlx_new_window(sess_id, WIN_SIZE, WIN_SIZE, "mlx 42");
-	//ft_draw_line(coor, coor2);
-//	mlx_pixel_put(sess_id, win_id, coor[0], coor[1], 0xFFFFFF);
-//	mlx_mouse_hook(win_id, mouse_hook, coor);
+	ft_draw_line(coor, coor2);
+	mlx_pixel_put(sess_id, win_id, coor[0], coor[1], 0xFFFFFF);
+	mlx_mouse_hook(win_id, mouse_hook, coor);
 	img_id = ft_new_img(WIN_SIZE, WIN_SIZE, sess_id, &img_str);
 	ft_fill_pixel(&img_str, 500, 500, 0xFFFFFF);
 	mlx_put_image_to_window(sess_id, win_id, img_id, 0, 0);
@@ -120,8 +120,7 @@ int main()
 	mlx_loop(sess_id);
 
 	return (1);
-}
-
+}/*
 int	main()
 {
 	void	*sess_id;
@@ -141,7 +140,7 @@ int	main()
 			mlx_pixel_put(sess_id, win_id, 250 + i, 250 + j, 0xFFFFFF);
 		j = -1;
 	}
-//	mlx_key_hook(win_id, ft_putchar,(void *)0);
+	mlx_key_hook(win_id, key_hook,(int *)0);
 	mlx_loop(win_id);
 	return (0);
 }*/

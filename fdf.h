@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 14:05:15 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/12 19:45:23 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/19 23:25:33 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,16 @@ typedef struct	s_id
 
 typedef struct	s_coor
 {
-	int		i_max;
-	int		j_max;
-	int		**tab;
+	t_id		*id;
+	int			i_max;
+	int			j_max;
+	int			**tab;
 	float		x_angle;
 	float		y_angle;
 	float		z_angle;
-	int		zoom;
-	int		x_offset;
-	int		y_offset;
+	float		zoom;
+	int			x_offset;
+	int			y_offset;
 }				t_coor;
 
 void	ft_put_template(t_id id);
