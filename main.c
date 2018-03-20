@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 14:04:31 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/19 23:49:42 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/20 19:38:34 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,10 @@ int	ft_key_hook(int kc, t_coor *info)
 		info->zoom = info->zoom - 0.2;
 	if (kc == 69)
 		info->zoom = info->zoom + 0.2;
+	if (kc == 81 && info->height > 2)
+		info->height = info->height - 1;
+	if (kc == 75)
+		info->height = info->height + 1;
 	printf("touche = %d\n info z angle = %f\n", kc, info->z_angle);
 	return (0);
 }

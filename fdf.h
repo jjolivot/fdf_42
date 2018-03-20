@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 14:05:15 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/19 23:25:33 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/20 20:17:45 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_coor
 {
 	t_id		*id;
 	int			i_max;
+	int			z_max;
 	int			j_max;
 	int			**tab;
 	float		x_angle;
@@ -40,6 +41,7 @@ typedef struct	s_coor
 	float		zoom;
 	int			x_offset;
 	int			y_offset;
+	int			height;
 }				t_coor;
 
 void	ft_put_template(t_id id);

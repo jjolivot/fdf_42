@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 19:07:26 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/19 23:53:40 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/20 19:41:25 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ int	ft_get_coor(t_coor info, int i, int j, int (*point)[2])
 	info.y_angle = (M_PI / 180) * info.y_angle;
 	info.x_angle = (M_PI / 180) * info.x_angle;
 	info.z_angle = (M_PI / 180) * info.z_angle;
-	y0 = cos(info.x_angle) * i * 20 + sin(info.x_angle) * 5 * info.tab[i][j];
-	z0 = -sin(info.x_angle) * i * 20 + cos(info.x_angle) * 5
+	y0 = cos(info.x_angle) * i * 20 + sin(info.x_angle) * info.height * info.tab[i][j];
+	z0 = -sin(info.x_angle) * i * 20 + cos(info.x_angle) * info.height
 		* info.tab[i][j];
 	x1 = cos(info.y_angle) * j * 20 - sin(info.y_angle) * z0;
 	z1 = sin(info.y_angle) * j * 20 + cos(info.y_angle) * z0;

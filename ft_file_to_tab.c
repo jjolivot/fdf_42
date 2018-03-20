@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 16:04:48 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/19 19:19:12 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/20 20:19:36 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static	void	ft_struct_set(int line_nbr, t_coor *info)
 	info->zoom = 1;
 	info->x_offset = 0;
 	info->y_offset = 0;
+	info->height = 1;
+	info->z_max = -2147483648;
 }
 
 //i = lignes, j = colonnes
@@ -49,11 +51,16 @@ t_coor	ft_file_to_tab(char *filepath, int line_nbr)
 		split = ft_strsplit(line, ' ');
 		info.tab[++fd[1]] = (int *)malloc(sizeof(int) * ft_tab_size(split));
 		while(split[++fd[2]])
+		{
 			info.tab[fd[1]][fd[2]] = ft_atoi(split[fd[2]]);
+			if (info.tab[fd[1]][fd[2]] > info.z_max)
+				info.z_max = info.tab[fd[1]][fd[2]];
+		}
 		free(line);
 		ft_all_free(split);
 	}
 	info.j_max = fd[2];
+	printf("zmax = %d\n", info.z_max);
 	return (info);
 }
 /*
