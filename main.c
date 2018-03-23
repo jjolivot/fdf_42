@@ -6,40 +6,26 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 14:04:31 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/20 19:38:34 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/23 17:19:21 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
-int	ft_line_parsing(char *line)
+void	ft_put_template(t_id id, t_coor *info)
 {
-return (0);
-}
-
-int		ft_parsing(int argc, char **argv)
-{
-	int		line_nbr;
-	int		fd;
-	char	*line;
-
-	line_nbr = 0;
-	if ((fd = open(argv[1], O_RDONLY)) == -1)
-		return (-1);
-	while (get_next_line(fd, &line))
-	{
-		line_nbr++;
-		if (ft_line_parsing(line) == -1)
-			return (-1);
-		free(line);
-	}
-	return (line_nbr);
-}
-
-void	ft_put_template(t_id id)
-{
-
+	mlx_string_put(id.sess, id.win, 20, 20, 0xFFFFFF, "Exit: ESC");
+	mlx_string_put(id.sess, id.win, 20, 40, 0xFFFFFF,
+			"Move: Num pad (2, 4, 6, 8)");
+	mlx_string_put(id.sess, id.win, 20, 60, 0xFFFFFF,
+			"Rotate: Arrows & Num pad (0, '.')");
+	mlx_string_put(id.sess, id.win, 20, 80, 0xFFFFFF, "Zoom: +, -");
+	mlx_string_put(id.sess, id.win, 20, 100, 0xFFFFFF,
+			"Change Height Factor: =, /");
+	mlx_string_put(id.sess, id.win, 800, 20, 0xFFFFFF, "Highest point:");
+	mlx_string_put(id.sess, id.win, 800, 40, 0xFFFFFF, ft_itoa(info->z_max));
+	mlx_string_put(id.sess, id.win, 800, 60, 0xFFFFFF, "Lowest point:");
+	mlx_string_put(id.sess, id.win, 800, 80, 0xFFFFFF, ft_itoa(info->z_min));
 }
 
 int	ft_loop_hook(t_coor *info)
@@ -47,26 +33,13 @@ int	ft_loop_hook(t_coor *info)
 	ft_draw_map(*info, *(*info).id);
 	mlx_put_image_to_window(info->id->sess, info->id->win, info->id->img, 0, 0);
 	ft_bzero(info->id->img_str, (WIN_SIZE * WIN_SIZE * 4));
-	mlx_put_image_to_window(info->id->sess, info->id->win, info->id->img, 0, 0);
-	ft_draw_map(*info, *info->id);
+	ft_put_template(*info->id, info);
 
 	return (0);
 }
 
-int	ft_key_hook(int kc, t_coor *info)
+void	ft_key_hook_suite(int kc, t_coor *info)
 {
-//haut
-	if (kc == 126)
-		info->x_angle = info->x_angle + 3;
-//bas
-	if (kc == 125)
-		info->x_angle = info->x_angle - 3;
-//gauche
-	if (kc == 123)
-		info->y_angle = info->y_angle + 3;
-//droite
-	if (kc == 124)
-		info->y_angle = info->y_angle - 3;
 	if (kc == 65)
 		info->z_angle = info->z_angle - 3;
 	if (kc == 82)
@@ -87,7 +60,21 @@ int	ft_key_hook(int kc, t_coor *info)
 		info->height = info->height - 1;
 	if (kc == 75)
 		info->height = info->height + 1;
-	printf("touche = %d\n info z angle = %f\n", kc, info->z_angle);
+}
+
+int		ft_key_hook(int kc, t_coor *info)
+{
+	if (kc == 126)
+		info->x_angle = info->x_angle + 3;
+	if (kc == 125)
+		info->x_angle = info->x_angle - 3;
+	if (kc == 123)
+		info->y_angle = info->y_angle + 3;
+	if (kc == 124)
+		info->y_angle = info->y_angle - 3;
+	ft_key_hook_suite(kc, info);
+	if (kc == 53)
+		exit(1);
 	return (0);
 }
 
@@ -103,10 +90,11 @@ int	main(int argc, char **argv)
 	if ((ret = ft_parsing(argc, argv)) == -1)
 		return (-1);
 	info = ft_file_to_tab(argv[1], ret);
+	if (info.tab[0][0] == -1)
+		return (-1);
 	id.sess = mlx_init();
 	id.win = mlx_new_window(id.sess, WIN_SIZE, WIN_SIZE, "fdf");
 	id.img = ft_new_img(WIN_SIZE, WIN_SIZE, id.sess, &id.img_str);
-	ft_put_template(id);
 	ft_draw_map(info, id);
 	info.id = &id;
 	mlx_hook(id.win, 2, (1l << 8), &ft_key_hook, &info);

@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/11 18:41:36 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/19 23:43:20 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/23 17:12:23 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,3 @@ void	ft_fill_pixel(char **img_str, int x, int y, int color)
 		(*img_str)[WIN_SIZE * y * 4 + 4 * x + 2] = (char)(color >> 16 & 0xFF);
 	}
 }
-/*
-int main()
-{
-	char *img_str;
-
-	void *sess_id = mlx_init();
-	void *win_id = mlx_new_window(sess_id, WIN_SIZE, WIN_SIZE, "mlx 42");
-	void *img_id = ft_new_img(WIN_SIZE, WIN_SIZE, sess_id, &img_str);
-	int i = -1;
-	int j = 450;
-	while (i++ < 550)
-	{
-		j = -1;
-		while (j++ < 550)
-			ft_fill_pixel(&img_str, i, j, 0xFFd700);
-	}
-	mlx_put_image_to_window(sess_id, win_id, img_id, 0, 0);
-	printf("test\n");
-	mlx_loop(sess_id);
-	return (1);
-}*/

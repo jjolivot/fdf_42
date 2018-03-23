@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 14:05:15 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/20 20:17:45 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/23 17:15:52 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 #include "minilibx_macos/mlx.h"
 #include "libft/libft.h"
-#include <stdio.h>
 #include "get_next_line.h"
 #include <math.h>
 
@@ -34,6 +33,7 @@ typedef struct	s_coor
 	int			i_max;
 	int			z_max;
 	int			j_max;
+	int			z_min;
 	int			**tab;
 	float		x_angle;
 	float		y_angle;
@@ -44,9 +44,12 @@ typedef struct	s_coor
 	int			height;
 }				t_coor;
 
-void	ft_put_template(t_id id);
+void	ft_put_template(t_id id, t_coor *info);
+int		ft_line_parsing(char *line);
+int		ft_argvc_parsing(int argc, char **argv);
 void	*ft_new_img(int size_line, int line_nbr, void *sess, char **img_string);
-void	ft_draw_line(int point_1[2], int point_2[2], t_id id);
+void	ft_draw_line(int point_1[2], int point_2[2], int color[2], t_id id);
+int		ft_colors(t_coor info, int ij[2], int (*colors)[2], int mode);
 int		ft_get_coor(t_coor info, int i, int j, int (*point)[2]);
 void	ft_fill_pixel(char **img_str, int x, int y, int color);
 void	ft_line_from_tab(t_coor info, int i, int j, t_id id);
