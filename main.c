@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 14:04:31 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/03/23 17:19:21 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/28 18:10:10 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	ft_put_template(t_id id, t_coor *info)
 {
+	char *z_max;
+	char *z_min;
+
+	z_min = ft_itoa(info->z_min);
+	z_max = ft_itoa(info->z_max);
 	mlx_string_put(id.sess, id.win, 20, 20, 0xFFFFFF, "Exit: ESC");
 	mlx_string_put(id.sess, id.win, 20, 40, 0xFFFFFF,
 			"Move: Num pad (2, 4, 6, 8)");
@@ -23,18 +28,19 @@ void	ft_put_template(t_id id, t_coor *info)
 	mlx_string_put(id.sess, id.win, 20, 100, 0xFFFFFF,
 			"Change Height Factor: =, /");
 	mlx_string_put(id.sess, id.win, 800, 20, 0xFFFFFF, "Highest point:");
-	mlx_string_put(id.sess, id.win, 800, 40, 0xFFFFFF, ft_itoa(info->z_max));
+	mlx_string_put(id.sess, id.win, 800, 40, 0xFFFFFF, z_max);
 	mlx_string_put(id.sess, id.win, 800, 60, 0xFFFFFF, "Lowest point:");
-	mlx_string_put(id.sess, id.win, 800, 80, 0xFFFFFF, ft_itoa(info->z_min));
+	mlx_string_put(id.sess, id.win, 800, 80, 0xFFFFFF, z_min);
+	free(z_min);
+	free(z_max);
 }
 
-int	ft_loop_hook(t_coor *info)
+int		ft_loop_hook(t_coor *info)
 {
 	ft_draw_map(*info, *(*info).id);
 	mlx_put_image_to_window(info->id->sess, info->id->win, info->id->img, 0, 0);
 	ft_bzero(info->id->img_str, (WIN_SIZE * WIN_SIZE * 4));
 	ft_put_template(*info->id, info);
-
 	return (0);
 }
 
@@ -78,14 +84,11 @@ int		ft_key_hook(int kc, t_coor *info)
 	return (0);
 }
 
-
-
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_id	id;
 	t_coor	info;
 	int		ret;
-	int		*param[2];
 
 	if ((ret = ft_parsing(argc, argv)) == -1)
 		return (-1);
@@ -95,7 +98,6 @@ int	main(int argc, char **argv)
 	id.sess = mlx_init();
 	id.win = mlx_new_window(id.sess, WIN_SIZE, WIN_SIZE, "fdf");
 	id.img = ft_new_img(WIN_SIZE, WIN_SIZE, id.sess, &id.img_str);
-	ft_draw_map(info, id);
 	info.id = &id;
 	mlx_hook(id.win, 2, (1l << 8), &ft_key_hook, &info);
 	mlx_loop_hook(id.sess, &ft_loop_hook, &info);

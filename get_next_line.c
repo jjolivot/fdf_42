@@ -6,7 +6,7 @@
 /*   By: jjolivot <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 18:54:48 by jjolivot          #+#    #+#             */
-/*   Updated: 2018/02/02 22:48:14 by jjolivot         ###   ########.fr       */
+/*   Updated: 2018/03/27 18:29:39 by jjolivot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		ft_get_reste(char **reste, char **line)
 	}
 	else
 	{
+		free(*line);
 		if (!(*line = ft_strdup(*reste)))
 			return (-1);
 		ft_strdel(reste);

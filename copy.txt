@@ -1,1 +1,0 @@
-cc -I /usr/local/include main1.c -L minilibx_macos -lmlx -framework OpenGL -framework Appkit
